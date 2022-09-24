@@ -1,0 +1,29 @@
+name: CI
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+  # Allows run workflow from Actions tab
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Install with Yarn
+        run: yarn
+
+      - name: Compile with TypeScript
+        run: yarn tsc
+
+      - name: Lint with ESLint
+        run: yarn lint
+
+      - name: Test with Jest
+        run: yarn test
